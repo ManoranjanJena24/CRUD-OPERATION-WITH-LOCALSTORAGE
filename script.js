@@ -5,15 +5,22 @@ function Submit() {
     var dataEntered = retrieveData(); 
     // console.log(dataEntered)
     var readData = readingDataFromLocalStorage(dataEntered);
-    if (row == null) {
-        insert(readData);  
-        msg.innerHTML="Data Inserted"
+    if (dataEntered == false) {
+        msg.innerHTML = "Please Enter All The Data"
     }
     else {
-        update();
-        msg.innerHTML = "Data Updated"
+        if (row == null) {
+            insert(readData);
+            msg.innerHTML = "Data Inserted"
+        }
+        else {
+            update();
+            msg.innerHTML = "Data Updated"
 
+        }
     }
+
+    document.getElementById("form").reset();
     
     
    
@@ -27,7 +34,13 @@ function retrieveData() {
     var exp = document.getElementById("exp").value;
     
     var arr = [name1, job, exp]
-    return arr;
+    if (arr.includes("")) {
+        return false;
+    }
+    else {
+        return arr; 
+    }
+  
 }
 //READ
 //Data in LocalStorage
